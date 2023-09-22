@@ -1,26 +1,32 @@
-(function () {
-  "use strict";
-  const root = document.getElementById("root");
-  const form = document.createElement("form");
+const root = document.getElementById("root");
+const form = createNewEl('form');
 
+function createNewEl(el){
+  return document.createElement(el);
+}
 
-  const inputEmail = document.createElement("input");
-  inputEmail.type = "text";
-  inputEmail.placeholder = "Enter your email";
+function createNewAttr(el, atr, val){
+  return el.setAttribute(atr, val);
+}
 
+function appSubEl(parent, child){
+  return parent.appendChild(child);
+}
 
-  const inputPassword = document.createElement("input");
-  inputPassword.type = "text";
-  inputPassword.placeholder = "Enter your password";
+const inputEmail = createNewEl("input");
+createNewAttr(inputEmail, "type", "text");
+createNewAttr(inputEmail, "placeholder", "Enter your email");
 
-  const btnSub = document.createElement("button");
-  btnSub.type = "submit";
-  btnSub.textContent = "Submit";
+const inputPassword = createNewEl("input");
+createNewAttr(inputPassword, "type", "text");
+createNewAttr(inputPassword, "placeholder", "Enter your password");
 
- 
-  form.appendChild(inputEmail);
-  form.appendChild(inputPassword);
-  form.appendChild(btnSub);
+const btnSub = createNewEl("button");
+createNewAttr(btnSub, "type", "submit");
+btnSub.textContent = "Submit";
 
-  root.appendChild(form);
-})();
+appSubEl(form, inputEmail);
+appSubEl(form, inputPassword);
+appSubEl(form, btnSub);
+
+appSubEl(root, form);
