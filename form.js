@@ -13,14 +13,14 @@ function appSubEl(parent, child){
   return parent.appendChild(child);
 }
 
-function getEl(target){
+function getElementValue(target){
   return document.getElementById(target).value;
 }
 
 function onSubmit(e){
   e.preventDefault();
-  console.log(getEl("email"));
-  console.log(getEl("password"));
+  console.log(getElementValue("email"));
+  console.log(getElementValue("password"));
 }
 const inputEmail = createNewEl("input");
 createNewAttr(inputEmail, "type", "text");
