@@ -21,8 +21,20 @@ const getElementValue=(target)=>{
 
 const onSubmit=(e)=>{
   e.preventDefault();
-  console.log(getElementValue("email"));
-  console.log(getElementValue("password"));
+  const emailValue = getElementValue("email");
+  const passwordValue = getElementValue("password");
+
+  if(emailValue.trim()==''){
+    console.error("Please, enter the email");
+    return
+  }else if(passwordValue.trim()==''&&passwordValue.length<5){
+    console.error("Please, enter the valid password")
+  }else{
+    console.log(getElementValue("email"));
+    console.log(getElementValue("password"));
+  }
+
+  
 }
 const inputEmail = createNewEl("input");
 addNewAttr(inputEmail, "type", "text");
