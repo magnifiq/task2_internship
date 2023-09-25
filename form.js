@@ -32,6 +32,14 @@ const onSubmit=(e)=>{
   }else{
     console.log(getElementValue("email"));
     console.log(getElementValue("password"));
+
+    const password=createNewEl('div');
+    const email=createNewEl('div');
+    appendSubEl(root, email,password)
+    password.textContent=getElementValue("email");
+    email.textContent=getElementValue("password")
+
+    document.getElementsByTagName('form')[0].reset()
   }
 
   
