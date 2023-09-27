@@ -19,6 +19,18 @@ const getElementValue = (target) => {
   return document.getElementById(target).value;
 };
 
+const showLoadingState = () => {
+  const loadingState = createNewEl("div");
+  addNewAttr(loadingState, "id", "loadingState");
+  loadingState.textContent = "Processing...";
+  appendSubEl(form, loadingState);
+};
+
+const hideLoadingState = () => {
+  const loadingState = document.getElementById("loadingState");
+  loadingState ? form.removeChild(loadingState) : null;
+};
+
 const onSubmit = async (e) => {
   e.preventDefault();
   const emailValue = getElementValue("email");
@@ -34,6 +46,7 @@ const onSubmit = async (e) => {
     console.log(emailValue);
     console.log(passwordValue);
 
+    showLoadingState();
     const data = {
       emailValue,
       passwordValue,
@@ -52,9 +65,11 @@ const onSubmit = async (e) => {
       if (response.ok) {
         const responseData = await response.json();
         console.log("Sent Data:", responseData.json);
-      };
+      }
     } catch {
       console.error("Something goes wrong");
+    } finally {
+      hideLoadingState();
     };
 
     const password = createNewEl("div");
@@ -63,25 +78,25 @@ const onSubmit = async (e) => {
     password.textContent = getElementValue("email");
     email.textContent = getElementValue("password");
 
-    localStorage.setItem('savedPassword', passwordValue);
-    localStorage.setItem('savedEmail', emailValue);
+    localStorage.setItem("savedPassword", passwordValue);
+    localStorage.setItem("savedEmail", emailValue);
 
     document.getElementsByTagName("form")[0].reset();
-  };
+  }
 };
 const inputEmail = createNewEl("input");
 addNewAttr(inputEmail, "type", "text");
 addNewAttr(inputEmail, "id", "email");
 addNewAttr(inputEmail, "placeholder", "Enter your email");
-const retrievedEmail = localStorage.getItem('savedPassword');
-addNewAttr(inputEmail, 'value', retrievedEmail);
+const retrievedEmail = localStorage.getItem("savedPassword");
+addNewAttr(inputEmail, "value", retrievedEmail);
 
 const inputPassword = createNewEl("input");
 addNewAttr(inputPassword, "type", "text");
 addNewAttr(inputPassword, "id", "password");
 addNewAttr(inputPassword, "placeholder", "Enter your password");
-const retrievedPassword = localStorage.getItem('savedPassword');
-addNewAttr(inputPassword, 'value', retrievedPassword);
+const retrievedPassword = localStorage.getItem("savedPassword");
+addNewAttr(inputPassword, "value", retrievedPassword);
 
 const btnSub = createNewEl("button");
 addNewAttr(btnSub, "type", "submit");
