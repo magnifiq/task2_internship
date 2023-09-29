@@ -32,6 +32,28 @@ const onSubmit = async (e) => {
   } else {
     console.log(emailValue);
     console.log(passwordValue);
+    const data = {
+      emailValue,
+      passwordValue,
+    };
+
+    const options = {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(data),
+    };
+    try {
+      const response = await fetch("https://httpbin.org/post", options);
+
+      if (response.ok) {
+        const responseData = await response.json();
+        console.log("Sent Data:", responseData.json);
+      }
+    } catch {
+      console.error("Something goes wrong");
+    }
 
     const password = createNewEl("div");
     const email = createNewEl("div");
