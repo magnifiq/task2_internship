@@ -19,6 +19,18 @@ const getElementValue = (target) => {
   return document.getElementById(target).value;
 };
 
+const showLoadingState = () => {
+  const loadingState = createNewEl("div");
+  addNewAttr(loadingState, "id", "loadingState");
+  loadingState.textContent = "Processing...";
+  appendSubEl(form, loadingState);
+};
+
+const hideLoadingState = () => {
+  const loadingState = document.getElementById("loadingState");
+  loadingState ? form.removeChild(loadingState) : null;
+};
+
 const onSubmit = async (e) => {
   e.preventDefault();
   const emailValue = getElementValue("email");
@@ -34,6 +46,7 @@ const onSubmit = async (e) => {
     console.log(emailValue);
     console.log(passwordValue);
 
+    showLoadingState();
     const data = {
       emailValue,
       passwordValue,
@@ -55,7 +68,9 @@ const onSubmit = async (e) => {
       }
     } catch {
       console.error("Something goes wrong");
-    }
+    }finally {
+      hideLoadingState();
+    };
 
     const password = createNewEl("div");
     const email = createNewEl("div");
