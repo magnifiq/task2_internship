@@ -68,9 +68,9 @@ const onSubmit = async (e) => {
       }
     } catch {
       console.error("Something goes wrong");
-    }finally {
+    } finally {
       hideLoadingState();
-    };
+    }
 
     const password = createNewEl("div");
     const email = createNewEl("div");
