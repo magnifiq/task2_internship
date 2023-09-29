@@ -23,6 +23,7 @@ const onSubmit = async (e) => {
   e.preventDefault();
   const emailValue = getElementValue("email");
   const passwordValue = getElementValue("password");
+
   if (emailValue.trim() == "") {
     console.error("Please, enter the email");
     return;
@@ -32,6 +33,7 @@ const onSubmit = async (e) => {
   } else {
     console.log(emailValue);
     console.log(passwordValue);
+
     const data = {
       emailValue,
       passwordValue,
@@ -60,17 +62,28 @@ const onSubmit = async (e) => {
     appendSubEl(root, email, password);
     password.textContent = getElementValue("email");
     email.textContent = getElementValue("password");
+
+    localStorage.setItem("savedPassword", passwordValue);
+    localStorage.setItem("savedEmail", emailValue);
+
+    document.getElementsByTagName("form")[0].reset();
+    localStorage.removeItem("savedPassword");
+    localStorage.removeItem("savedEmail");
   }
 };
 const inputEmail = createNewEl("input");
 addNewAttr(inputEmail, "type", "text");
 addNewAttr(inputEmail, "id", "email");
 addNewAttr(inputEmail, "placeholder", "Enter your email");
+const retrievedEmail = localStorage.getItem("savedPassword");
+addNewAttr(inputEmail, "value", retrievedEmail);
 
 const inputPassword = createNewEl("input");
 addNewAttr(inputPassword, "type", "text");
 addNewAttr(inputPassword, "id", "password");
 addNewAttr(inputPassword, "placeholder", "Enter your password");
+const retrievedPassword = localStorage.getItem("savedPassword");
+addNewAttr(inputPassword, "value", retrievedPassword);
 
 const btnSub = createNewEl("button");
 addNewAttr(btnSub, "type", "submit");
