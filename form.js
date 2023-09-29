@@ -26,6 +26,12 @@ const onSubmit = async (e) => {
 
   console.log(emailValue);
   console.log(passwordValue);
+
+  const password = createNewEl("div");
+  const email = createNewEl("div");
+  appendSubEl(root, email, password);
+  password.textContent = getElementValue("email");
+  email.textContent = getElementValue("password");
 };
 const inputEmail = createNewEl("input");
 addNewAttr(inputEmail, "type", "text");
