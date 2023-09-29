@@ -23,15 +23,22 @@ const onSubmit = async (e) => {
   e.preventDefault();
   const emailValue = getElementValue("email");
   const passwordValue = getElementValue("password");
+  if (emailValue.trim() == "") {
+    console.error("Please, enter the email");
+    return;
+  } else if (passwordValue.trim() == "" && passwordValue.length < 5) {
+    console.error("Please, enter the valid password");
+    return;
+  } else {
+    console.log(emailValue);
+    console.log(passwordValue);
 
-  console.log(emailValue);
-  console.log(passwordValue);
-
-  const password = createNewEl("div");
-  const email = createNewEl("div");
-  appendSubEl(root, email, password);
-  password.textContent = getElementValue("email");
-  email.textContent = getElementValue("password");
+    const password = createNewEl("div");
+    const email = createNewEl("div");
+    appendSubEl(root, email, password);
+    password.textContent = getElementValue("email");
+    email.textContent = getElementValue("password");
+  }
 };
 const inputEmail = createNewEl("input");
 addNewAttr(inputEmail, "type", "text");
