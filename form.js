@@ -19,6 +19,14 @@ const getElementValue = (target) => {
   return document.getElementById(target).value;
 };
 
+const onSubmit = async (e) => {
+  e.preventDefault();
+  const emailValue = getElementValue("email");
+  const passwordValue = getElementValue("password");
+
+  console.log(emailValue);
+  console.log(passwordValue);
+};
 const inputEmail = createNewEl("input");
 addNewAttr(inputEmail, "type", "text");
 addNewAttr(inputEmail, "id", "email");
@@ -32,6 +40,7 @@ addNewAttr(inputPassword, "placeholder", "Enter your password");
 const btnSub = createNewEl("button");
 addNewAttr(btnSub, "type", "submit");
 btnSub.textContent = "Submit";
+btnSub.addEventListener("click", onSubmit);
 
 appendSubEl(form, inputEmail, inputPassword, btnSub);
 
