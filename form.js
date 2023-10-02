@@ -60,6 +60,9 @@ addNewAttr(btnSub, "type", "submit");
 btnSub.textContent = "Submit";
 btnSub.addEventListener("click", onSubmit);
 
-appendSubEl(form, inputEmail, inputPassword, btnSub);
+const passwordDiv = createNewEl("div");
+const emailDiv = createNewEl("div");
+
+appendSubEl(form, inputEmail, inputPassword, btnSub, emailDiv, passwordDiv);
 
 appendSubEl(root, form);
