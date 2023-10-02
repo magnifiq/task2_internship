@@ -19,17 +19,22 @@ const getElementValue = (target) => {
   return document.getElementById(target).value;
 };
 
+const checkValidation = (emailValue, passwordValue) => {
+  if (emailValue.trim() === "") {
+    console.error("Please, enter the email");
+    return false;
+  }
+  if (passwordValue.trim() === "" && passwordValue.length < 5) {
+    console.error("Please, enter the valid password");
+    return false;
+  }
+  return true;
+};
 const onSubmit = async (e) => {
   e.preventDefault();
   const emailValue = getElementValue("email");
   const passwordValue = getElementValue("password");
-  if (emailValue.trim() == "") {
-    console.error("Please, enter the email");
-    return;
-  } else if (passwordValue.trim() == "" && passwordValue.length < 5) {
-    console.error("Please, enter the valid password");
-    return;
-  } else {
+  if (checkValidation(emailValue, passwordValue)) {
     console.log(emailValue);
     console.log(passwordValue);
 
