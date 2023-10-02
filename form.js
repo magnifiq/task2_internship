@@ -19,6 +19,16 @@ const getElementValue = (target) => {
   return document.getElementById(target).value;
 };
 
+const showValues = (passwordDiv, emailDiv) => {
+  passwordDiv.textContent = getElementValue("email");
+  emailDiv.textContent = getElementValue("password");
+};
+
+const hideValues = (passwordDiv, emailDiv) => {
+  passwordDiv.textContent = "";
+  emailDiv.textContent = "";
+};
+
 const onSubmit = async (e) => {
   e.preventDefault();
   const emailValue = getElementValue("email");
@@ -26,6 +36,9 @@ const onSubmit = async (e) => {
 
   console.log(emailValue);
   console.log(passwordValue);
+
+  hideValues(passwordDiv, emailDiv);
+  showValues(passwordDiv, emailDiv);
 };
 const inputEmail = createNewEl("input");
 addNewAttr(inputEmail, "type", "text");
@@ -42,6 +55,9 @@ addNewAttr(btnSub, "type", "submit");
 btnSub.textContent = "Submit";
 btnSub.addEventListener("click", onSubmit);
 
-appendSubEl(form, inputEmail, inputPassword, btnSub);
+const passwordDiv = createNewEl("div");
+const emailDiv = createNewEl("div");
+
+appendSubEl(form, inputEmail, inputPassword, btnSub, emailDiv, passwordDiv);
 
 appendSubEl(root, form);
