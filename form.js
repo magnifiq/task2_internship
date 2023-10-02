@@ -27,8 +27,7 @@ const showLoadingState = () => {
 };
 
 const hideLoadingState = () => {
-  const loadingState = document.getElementById("loadingState");
-  loadingState ? form.removeChild(loadingState) : null;
+  document.getElementById("loadingState").remove();
 };
 
 const onSubmit = async (e) => {
