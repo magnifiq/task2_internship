@@ -19,26 +19,31 @@ const getElementValue = (target) => {
   return document.getElementById(target).value;
 };
 
-const showValues = (passwordDiv, emailDiv) => {
-  passwordDiv.textContent = getElementValue("email");
-  emailDiv.textContent = getElementValue("password");
+const checkValidation = (emailValue, passwordValue) => {
+  if (emailValue.trim() === "") {
+    console.error("Please, enter the email");
+    return false;
+  }
+  if (passwordValue.trim() === "" && passwordValue.length < 5) {
+    console.error("Please, enter the valid password");
+    return false;
+  }
+  return true;
 };
-
-const hideValues = (passwordDiv, emailDiv) => {
-  passwordDiv.textContent = "";
-  emailDiv.textContent = "";
-};
-
 const onSubmit = async (e) => {
   e.preventDefault();
   const emailValue = getElementValue("email");
   const passwordValue = getElementValue("password");
+  if (checkValidation(emailValue, passwordValue)) {
+    console.log(emailValue);
+    console.log(passwordValue);
 
-  console.log(emailValue);
-  console.log(passwordValue);
-
-  hideValues(passwordDiv, emailDiv);
-  showValues(passwordDiv, emailDiv);
+    const password = createNewEl("div");
+    const email = createNewEl("div");
+    appendSubEl(root, email, password);
+    password.textContent = getElementValue("email");
+    email.textContent = getElementValue("password");
+  }
 };
 const inputEmail = createNewEl("input");
 addNewAttr(inputEmail, "type", "text");
