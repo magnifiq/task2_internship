@@ -42,13 +42,7 @@ const onSubmit = (e) => {
   e.preventDefault();
   const emailValue = getElementValue("email");
   const passwordValue = getElementValue("password");
-  if (emailValue.trim() == "") {
-    console.error("Please, enter the email");
-    return;
-  } else if (passwordValue.trim() == "" && passwordValue.length < 5) {
-    console.error("Please, enter the valid password");
-    return;
-  } else {
+  if (checkValidation(emailValue, passwordValue)) {
     console.log(emailValue);
     console.log(passwordValue);
     const data = {
@@ -78,6 +72,9 @@ addNewAttr(btnSub, "type", "submit");
 btnSub.textContent = "Submit";
 btnSub.addEventListener("click", onSubmit);
 
-appendSubEl(form, inputEmail, inputPassword, btnSub);
+const passwordDiv = createNewEl("div");
+const emailDiv = createNewEl("div");
+
+appendSubEl(form, inputEmail, inputPassword, btnSub, emailDiv, passwordDiv);
 
 appendSubEl(root, form);
