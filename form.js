@@ -1,23 +1,18 @@
+import {
+  createNewEl,
+  addNewAttr,
+  appendSubEl,
+  getElementValue,
+  checkValidation,
+  postRequest,
+  saveValue,
+  hideLoadingState,
+  clearValue,
+  getValues,
+} from "./helpers.js";
+
 const root = document.getElementById("root");
-
-const createNewEl = (el) => {
-  return document.createElement(el);
-};
 const form = createNewEl("form");
-
-const addNewAttr = (el, attr, val) => {
-  return el.setAttribute(attr, val);
-};
-
-const appendSubEl = (parent, ...rest) => {
-  rest.forEach((child) => {
-    parent.appendChild(child);
-  });
-};
-
-const getElementValue = (target) => {
-  return document.getElementById(target).value;
-};
 
 const showLoadingState = () => {
   const loadingState = createNewEl("div");
@@ -26,43 +21,26 @@ const showLoadingState = () => {
   appendSubEl(form, loadingState);
 };
 
-const hideLoadingState = () => {
-  document.getElementById("loadingState").remove();
-};
-
-const onSubmit = async (e) => {
+const onSubmit = (e) => {
   e.preventDefault();
   const emailValue = getElementValue("email");
   const passwordValue = getElementValue("password");
-
-  if (emailValue.trim() == "") {
-    console.error("Please, enter the email");
-    return;
-  } else if (passwordValue.trim() == "" && passwordValue.length < 5) {
-    console.error("Please, enter the valid password");
-    return;
-  } else {
+  if (checkValidation(emailValue, passwordValue)) {
     console.log(emailValue);
     console.log(passwordValue);
-
     showLoadingState();
     const data = {
       emailValue,
       passwordValue,
     };
     postRequest(data);
-    const password = createNewEl("div");
-    const email = createNewEl("div");
-    appendSubEl(root, email, password);
-    password.textContent = getElementValue("email");
-    email.textContent = getElementValue("password");
-
-    saveValue("savedPassword", passwordValue);
-    saveValue("savedEmail", emailValue);
-
-    document.getElementsByTagName("form")[0].reset();
     clearValue("savedPassword");
     clearValue("savedEmail");
+    saveValue("savedPassword", passwordValue);
+    saveValue("savedEmail", emailValue);
+    passwordDiv.textContent = retrievedPassword;
+    emailDiv.textContent = retrievedEmail;
+    document.getElementsByTagName("form")[0].reset();
   }
 };
 const inputEmail = createNewEl("input");
