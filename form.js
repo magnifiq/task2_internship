@@ -51,25 +51,7 @@ const onSubmit = async (e) => {
       emailValue,
       passwordValue,
     };
-
-    const options = {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(data),
-    };
-    try {
-      const response = await fetch("https://httpbin.org/post", options);
-
-      if (response.ok) {
-        const responseData = await response.json();
-        console.log("Sent Data:", responseData.json);
-      }
-    } catch {
-      console.error("Something goes wrong");
-    }
-
+    postRequest(data);
     const password = createNewEl("div");
     const email = createNewEl("div");
     appendSubEl(root, email, password);
@@ -105,6 +87,9 @@ addNewAttr(btnSub, "type", "submit");
 btnSub.textContent = "Submit";
 btnSub.addEventListener("click", onSubmit);
 
-appendSubEl(form, inputEmail, inputPassword, btnSub);
+const passwordDiv = createNewEl("div");
+const emailDiv = createNewEl("div");
+
+appendSubEl(form, inputEmail, inputPassword, btnSub, emailDiv, passwordDiv);
 
 appendSubEl(root, form);
