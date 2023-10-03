@@ -50,53 +50,35 @@ const onSubmit = async (e) => {
       emailValue,
       passwordValue,
     };
-
-    const options = {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(data),
-    };
-    try {
-      const response = await fetch("https://httpbin.org/post", options);
-
-      if (response.ok) {
-        const responseData = await response.json();
-        console.log("Sent Data:", responseData.json);
-      }
-    } catch {
-      console.error("Something goes wrong");
-    } finally {
-      hideLoadingState();
-    }
-
+    postRequest(data);
     const password = createNewEl("div");
     const email = createNewEl("div");
     appendSubEl(root, email, password);
     password.textContent = getElementValue("email");
     email.textContent = getElementValue("password");
 
-    localStorage.setItem("savedPassword", passwordValue);
-    localStorage.setItem("savedEmail", emailValue);
+    saveValue("savedPassword", passwordValue);
+    saveValue("savedEmail", emailValue);
 
     document.getElementsByTagName("form")[0].reset();
-    localStorage.removeItem("savedPassword");
-    localStorage.removeItem("savedEmail");
+    clearValue("savedPassword");
+    clearValue("savedEmail");
   }
 };
 const inputEmail = createNewEl("input");
 addNewAttr(inputEmail, "type", "text");
 addNewAttr(inputEmail, "id", "email");
 addNewAttr(inputEmail, "placeholder", "Enter your email");
-const retrievedEmail = localStorage.getItem("savedPassword");
+const [retrievedEmail, retrievedPassword] = getValues(
+  "savedEmail",
+  "savedPassword"
+);
 addNewAttr(inputEmail, "value", retrievedEmail);
 
 const inputPassword = createNewEl("input");
 addNewAttr(inputPassword, "type", "text");
 addNewAttr(inputPassword, "id", "password");
 addNewAttr(inputPassword, "placeholder", "Enter your password");
-const retrievedPassword = localStorage.getItem("savedPassword");
 addNewAttr(inputPassword, "value", retrievedPassword);
 
 const btnSub = createNewEl("button");
@@ -104,6 +86,9 @@ addNewAttr(btnSub, "type", "submit");
 btnSub.textContent = "Submit";
 btnSub.addEventListener("click", onSubmit);
 
-appendSubEl(form, inputEmail, inputPassword, btnSub);
+const passwordDiv = createNewEl("div");
+const emailDiv = createNewEl("div");
+
+appendSubEl(form, inputEmail, inputPassword, btnSub, emailDiv, passwordDiv);
 
 appendSubEl(root, form);
