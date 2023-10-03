@@ -19,19 +19,17 @@ const getElementValue = (target) => {
   return document.getElementById(target).value;
 };
 
-const saveValue = (name, value) => {
-  return localStorage.setItem(name, value);
+const showLoadingState = () => {
+  const loadingState = createNewEl("div");
+  addNewAttr(loadingState, "id", "loadingState");
+  loadingState.textContent = "Processing...";
+  appendSubEl(form, loadingState);
 };
 
-const clearValue = (name) => {
-  return localStorage.removeItem(name);
+const hideLoadingState = () => {
+  document.getElementById("loadingState").remove();
 };
 
-const getValues = (...rest) => {
-  return rest.map((child) => {
-    return localStorage.getItem(child) || "";
-  });
-};
 const onSubmit = async (e) => {
   e.preventDefault();
   const emailValue = getElementValue("email");
@@ -47,6 +45,7 @@ const onSubmit = async (e) => {
     console.log(emailValue);
     console.log(passwordValue);
 
+    showLoadingState();
     const data = {
       emailValue,
       passwordValue,
