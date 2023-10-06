@@ -3,6 +3,8 @@
   "version": "1.0.0",
   "description": "JS tasks",
   "main": "form.js",
+  "type": "module",
+
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
@@ -23,5 +25,8 @@
     "html-webpack-plugin": "^5.5.3",
     "webpack": "^5.88.2",
     "webpack-cli": "^5.1.4"
+  },
+  "dependencies": {
+    "axios": "^1.5.1"
   }
 }

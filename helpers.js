@@ -1,3 +1,4 @@
+import axios from "https://cdn.skypack.dev/axios";
 const createNewEl = (el) => {
   return document.createElement(el);
 };
@@ -50,10 +51,11 @@ const postRequest = async (data) => {
     headers: {
       "Content-Type": "application/json",
     },
+    url: "https://httpbin.org/post",
     body: JSON.stringify(data),
   };
   try {
-    const response = await fetch("https://httpbin.org/post", options);
+    const response = await axios(options);
 
     if (response.ok) {
       const responseData = await response.json();
