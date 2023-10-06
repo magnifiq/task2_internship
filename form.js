@@ -70,3 +70,4 @@ const emailDiv = createNewEl("div");
 appendSubEl(form, inputEmail, inputPassword, btnSub, emailDiv, passwordDiv);
 
 appendSubEl(root, form);
+
