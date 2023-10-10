@@ -1,4 +1,4 @@
-import axios from "https://cdn.skypack.dev/axios";
+import axios from "axios";
 const createNewEl = (el) => {
   return document.createElement(el);
 };
