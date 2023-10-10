@@ -21,7 +21,7 @@ const checkValidation = (emailValue, passwordValue) => {
     console.error("Please, enter the email");
     return false;
   }
-  if (passwordValue.trim() === "" && passwordValue.length < 5) {
+  if (passwordValue.trim() === "" || passwordValue.length < 5) {
     console.error("Please, enter the valid password");
     return false;
   }
